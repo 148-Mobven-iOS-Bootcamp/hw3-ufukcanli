@@ -15,28 +15,45 @@ final class CalculatorViewController: UIViewController {
     
     private var manager = CalculatorManager()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        manager.clearAll()
+        updateUI()
+    }
+    
     @IBAction func someButtonDidTap(_ sender: UIButton) {
-        guard let value = sender.titleLabel?.text else { return }
-        switch sender.tag {
-        case 11:
-            manager.clearAll()
-            updateUI()
-        case 12:
-            manager.clearLast()
-            updateUI()
-        case 15:
-            manager.calculate()
-            updateUI()
-        default:
-            manager.addToWorking(value: value)
-            updateUI()
-        }
+        callManager(sender)
+        updateUI()
     }
 }
 
 private extension CalculatorViewController {
+    
     func updateUI() {
         workingLabel.text = manager.working
         resultLabel.text = manager.result
+    }
+    
+    func callManager(_ sender: UIButton) {
+        guard let value = sender.titleLabel?.text else { return }
+        switch sender.tag {
+        case 11:
+            manager.clearAll()
+        case 12:
+            manager.clearLast()
+        case 15:
+            guard manager.isValidInput() else {
+                displayAlert(
+                    title: "Ooops!",
+                    message: "This is not a valid operation.",
+                    buttonTitle: "OK"
+                )
+                return
+            }
+            manager.calculate()
+        default:
+            manager.addToWorking(value: value)
+        }
     }
 }
