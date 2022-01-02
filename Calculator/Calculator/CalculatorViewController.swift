@@ -7,10 +7,32 @@
 
 import UIKit
 
-class CalculatorViewController: UIViewController {
+final class CalculatorViewController: UIViewController {
 
-    @IBOutlet weak var calculatorWorkingLabel: UILabel!
-    @IBOutlet weak var calculatorResultLabel: UILabel!
-    @IBOutlet var calculatorButtons: [UIButton]!
+    @IBOutlet weak var workingLabel: UILabel!
+    @IBOutlet weak var resultLabel: UILabel!
+    @IBOutlet var allButtons: [UIButton]!
     
+    private var manager = CalculatorManager()
+    
+    @IBAction func someButtonDidTap(_ sender: UIButton) {
+        guard let value = sender.titleLabel?.text else { return }
+        switch sender.tag {
+        case 11:
+            manager.clearAll()
+            updateUI()
+        case 13:
+            manager.addToWorking(value: value)
+            print(value)
+        default:
+            break
+        }
+    }
+}
+
+private extension CalculatorViewController {
+    func updateUI() {
+        workingLabel.text = manager.working
+        resultLabel.text = manager.result
+    }
 }
