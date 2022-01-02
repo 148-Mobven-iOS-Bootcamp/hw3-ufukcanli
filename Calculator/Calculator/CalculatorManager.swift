@@ -12,22 +12,24 @@ final class CalculatorManager {
     private(set) var working = ""
     private(set) var result = ""
     
-    func clearAll() {
+    var errorHappened = false
+    
+    private func clearAll() {
         working = ""
         result = ""
     }
     
-    func clearLast() {
+    private func clearLast() {
         guard !working.isEmpty else { return }
         working.removeLast()
     }
     
-    func addToWorking(value: String) {
+    private func addToWorking(value: String) {
         working += value
     }
     
-    func calculate() {
-        guard !working.isEmpty, isValidInput() else { return }
+    private func calculate() {
+        guard !working.isEmpty else { return }
         let expression = NSExpression(format: working)
         let resultDouble = expression.expressionValue(with: nil, context: nil) as! Double
         let resultString = format(result: resultDouble)
@@ -76,5 +78,23 @@ final class CalculatorManager {
             return true
         }
         return false
+    }
+    
+    func makeAction(_ value: String, tag: Int) {
+        print(value, tag)
+        switch tag {
+        case 11:
+            clearAll()
+        case 12:
+            clearLast()
+        case 15:
+            if isValidInput() {
+                calculate()
+            } else {
+                errorHappened = true
+            }
+        default:
+            addToWorking(value: value)
+        }
     }
 }
