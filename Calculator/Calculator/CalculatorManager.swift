@@ -81,7 +81,6 @@ final class CalculatorManager {
     }
     
     func makeAction(_ value: String, tag: Int) {
-        print(value, tag)
         switch tag {
         case 11:
             clearAll()

@@ -28,11 +28,7 @@ final class CalculatorViewController: UIViewController {
         updateUI()
         
         if manager.errorHappened {
-            displayAlert(
-                title: "Ooops!",
-                message: "Invalid input.",
-                buttonTitle: "OK"
-            )
+            displayAlert(title: "Ooops!", message: "Invalid input.", buttonTitle: "OK")
             manager.errorHappened = false
         }
     }
