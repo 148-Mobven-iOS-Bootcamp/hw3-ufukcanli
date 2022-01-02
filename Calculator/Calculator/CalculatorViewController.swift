@@ -21,11 +21,15 @@ final class CalculatorViewController: UIViewController {
         case 11:
             manager.clearAll()
             updateUI()
-        case 13:
-            manager.addToWorking(value: value)
-            print(value)
+        case 12:
+            manager.clearLast()
+            updateUI()
+        case 15:
+            manager.calculate()
+            updateUI()
         default:
-            break
+            manager.addToWorking(value: value)
+            updateUI()
         }
     }
 }
