@@ -136,7 +136,7 @@
                                                 <rect key="frame" x="310.5" y="0.0" width="103.5" height="123"/>
                                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="40"/>
-                                                <state key="normal" title="x">
+                                                <state key="normal" title="*">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
